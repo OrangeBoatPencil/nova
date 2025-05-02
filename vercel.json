@@ -1,11 +1,5 @@
 {
   "version": 2,
-  "projects": [
-    {
-      "src": "apps/dashboard/next.config.*",
-      "use": "@vercel/next"
-    }
-  ],
   "git": {
     "ignoreCommand": "git diff --quiet HEAD^ -- . ':(exclude)supabase/**'"
   }
