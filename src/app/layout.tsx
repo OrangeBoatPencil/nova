@@ -1,12 +1,15 @@
+"use client";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import routerProvider from "@refinedev/nextjs-router/app";
-import { authProvider } from "@/providers/auth-provider";
+import { authProvider } from "@/providers/supabase-auth-provider";
 import { supabaseProvider } from "@/providers/supabase-provider";
 import { accessControlProvider } from "@/providers/access-control-provider";
+import { liveProvider } from "@refinedev/supabase";
+import { createBrowserSupabaseClient } from "@/utils/supabase/client";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +30,7 @@ export default function RootLayout({
           <Refine
             authProvider={authProvider}
             dataProvider={supabaseProvider()}
+            liveProvider={liveProvider(createBrowserSupabaseClient())}
             routerProvider={routerProvider}
             accessControlProvider={accessControlProvider}
             resources={[
