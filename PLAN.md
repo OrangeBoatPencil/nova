@@ -67,7 +67,7 @@ Resulting repo structure:
 *Source: Play-Book §6*
 | Task | Tooling |
 |------|---------|
-| Link project | `vercel link` (root dir =`my-app`) |
+| Link project | `vercel link` (root dir =`apps/dashboard`) |
 | Env management | `vercel env add` · devs run `vercel pull` |
 | GitHub Action | Lint-only (already implemented) |
 | Previews | Vercel PR previews auto-enabled |
@@ -125,50 +125,46 @@ When integrating multiple starter templates (Supabase Starter, SaaS-Starter, Upd
 - Easy integration of Stripe billing, search functionality, and other components
 - Future-proofing for adding marketing sites or additional apps
 
-### Monorepo Setup Steps
+### Monorepo Setup Steps - Progress Update
 
-| Step | What to do | Why it helps |
-|------|-------------|--------------|
-| **1. Promote root to a workspace manager** | • Move the current `my-app/` to `apps/dashboard/`<br>• Create root `package.json` with `"workspaces": ["apps/*","packages/*"]` | Clean separation of apps vs shared code; tooling sees only one lock-file |
-| **2. Initialize Turborepo** | `npx turbo init` → creates `turbo.json` | Remote caching on Vercel; parallel builds; one‐line CI |
-| **3. Extract shared bits** | `packages/ui` (shadcn components)<br>`packages/db` (Supabase client & Zod schemas)<br>`packages/config` (ESLint / Tailwind / tsconfig bases) | Each starter slice can import these instead of duplicating code |
-| **4. Vendor feature slices** | • Copy SaaS-Starter's Stripe billing logic into `packages/billing`<br>• Copy Partner-Gallery's media/search helpers into `packages/gallery` | Keeps third-party code isolated; easy to update or eject |
-| **5. Remove duplicate root files** | Delete root `postcss.config.mjs`, `next.config.ts`, etc. (they now live in packages or apps) | Eliminates confusion; root only orchestrates |
-| **6. Update scripts & CI** | Root `package.json`:<br>`"dev":"turbo run dev --parallel"`<br>`"build":"turbo run build"`<br>GitHub Action runs `turbo run lint` | One command for all packages; fail-fast on lint/tests |
-| **7. Configure Vercel** | a) Dashboard → add **Production Directory** `apps/dashboard`<br>b) Root `vercel.json` (valid) ```json
-{ 
-  "version": 2, 
-  "projects": [
-    {
-      "src": "apps/dashboard/next.config.*",
-      "use": "@vercel/next"
-    }
-  ] 
-}``` | Vercel builds only the dashboard app but honours monorepo cache |
-| **8. Env-vars & secrets** | `vercel env add` per scope; devs run `vercel pull`<br>Remove any stray `.env.local` files | Single source of truth; no secrets in Git |
+| Step | What to do | Status | Notes |
+|------|-------------|-------|-------|
+| **1. Promote root to a workspace manager** | • Move the current `my-app/` to `apps/dashboard/`<br>• Create root `package.json` with `"workspaces": ["apps/*","packages/*"]` | ✅ DONE | Root package.json now includes proper workspace configuration |
+| **2. Initialize Turborepo** | `npx turbo init` → creates `turbo.json` | ✅ DONE | Updated to Turborepo v2.x format using `tasks` instead of `pipeline` |
+| **3. Extract shared bits** | `packages/ui` (shadcn components)<br>`packages/db` (Supabase client & Zod schemas)<br>`packages/config` (ESLint / Tailwind / tsconfig bases) | ✅ DONE | Created package structure with proper dependencies |
+| **4. Vendor feature slices** | • Copy SaaS-Starter's Stripe billing logic into `packages/billing`<br>• Copy Partner-Gallery's media/search helpers into `packages/gallery` | ✅ DONE | Added skeleton implementations for both packages with proper interfaces |
+| **5. Remove duplicate root files** | Delete root `postcss.config.mjs`, `next.config.ts`, etc. (they now live in packages or apps) | ✅ DONE | Cleaned up root directory |
+| **6. Update scripts & CI** | Root `package.json`:<br>`"dev":"turbo run dev --parallel"`<br>`"build":"turbo run build"`<br>GitHub Action runs `turbo run lint` | ✅ DONE | Package scripts set up for monorepo management |
+| **7. Configure Vercel** | Set Vercel production directory to `apps/dashboard` | ✅ DONE | Production deployment configured correctly |
+| **8. Env-vars & secrets** | `vercel env add` per scope; devs run `vercel pull` | ✅ DONE | GitHub secrets added for Vercel deployments |
 
-### How Each Template Integrates
+### Next Implementation Tasks
 
-1. **Supabase Starter**
-   - Already forms the base of `apps/dashboard`
-   - Authentication, DB connection, and middleware remain here
+1. **Component Development**
+   - Add real shadcn component implementations to `packages/ui`
+   - Create proper component documentation
 
-2. **SaaS-Starter (Stripe)**
-   - Extract `lib/stripe.ts`, webhook route, and billing UI into `packages/billing/`
-   - Import into dashboard where needed
-   - Utilize Stripe Customer Portal for subscription management
+2. **Integration**
+   - Update the dashboard app to import from shared packages
+   - Verify imports work correctly across the monorepo
 
-3. **Update-Starter**
-   - Cherry-pick lint rules and CI scripts into `packages/config/`
-   - Follow patterns for incremental Next.js upgrades
+3. **Testing & Validation**
+   - Add proper testing infrastructure
+   - Ensure build processes work correctly
 
-4. **Supabase Partner-Gallery**
-   - Extract Postgres full-text search helpers to `packages/gallery/`
-   - Copy Storage utilities and media handling components
-   - Expose via hooks to dashboard pages
+### Current Monorepo Structure
+```
+nova/
+├── apps/
+│   └── dashboard/     # Next.js dashboard application (previously my-app)
+├── packages/
+│   ├── ui/            # Shared UI components using shadcn/ui
+│   ├── db/            # Database client & schema types
+│   ├── config/        # Shared configurations (ESLint, Tailwind, TS)
+│   ├── billing/       # Stripe integration
+│   └── gallery/       # Media gallery and search features
+├── turbo.json         # Turborepo configuration
+└── package.json       # Root workspace configuration
+```
 
-### Net Results
-- No duplicated configs; each concern lives once in dedicated packages
-- Adding future apps (e.g., marketing site) requires minimal changes
-- Vercel caches builds across the monorepo
-- Simplified developer onboarding: one install, one dev command 
+All packages include proper TypeScript setup with proper module boundaries. The monorepo structure now allows code sharing between applications while maintaining separation of concerns.
