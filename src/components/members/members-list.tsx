@@ -1,81 +1,83 @@
-import { useState } from "react";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from "@/components/ui/table";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Search, UserPlus, Users, Edit, Trash2, Eye } from "lucide-react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuLabel, 
-  DropdownMenuSeparator, 
-  DropdownMenuTrigger 
-} from "@/components/ui/dropdown-menu";
+'use client';
+
+import { useState } from 'react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { MoreHorizontal, Search, UserPlus, Users, Edit, Trash2, Eye } from 'lucide-react';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 type Member = {
   id: string;
   name: string;
   email: string;
   role: string;
-  status: "active" | "inactive";
+  status: 'active' | 'inactive';
   joinedDate: string;
 };
 
 const dummyMembers: Member[] = [
   {
-    id: "1",
-    name: "John Doe",
-    email: "john@example.com",
-    role: "Admin",
-    status: "active",
-    joinedDate: "2023-01-15",
+    id: '1',
+    name: 'John Doe',
+    email: 'john@example.com',
+    role: 'Admin',
+    status: 'active',
+    joinedDate: '2023-01-15',
   },
   {
-    id: "2",
-    name: "Jane Smith",
-    email: "jane@example.com",
-    role: "Member",
-    status: "active",
-    joinedDate: "2023-02-20",
+    id: '2',
+    name: 'Jane Smith',
+    email: 'jane@example.com',
+    role: 'Member',
+    status: 'active',
+    joinedDate: '2023-02-20',
   },
   {
-    id: "3",
-    name: "Bob Johnson",
-    email: "bob@example.com",
-    role: "Editor",
-    status: "inactive",
-    joinedDate: "2023-03-10",
+    id: '3',
+    name: 'Bob Johnson',
+    email: 'bob@example.com',
+    role: 'Editor',
+    status: 'inactive',
+    joinedDate: '2023-03-10',
   },
   {
-    id: "4",
-    name: "Alice Williams",
-    email: "alice@example.com",
-    role: "Member",
-    status: "active",
-    joinedDate: "2023-04-05",
+    id: '4',
+    name: 'Alice Williams',
+    email: 'alice@example.com',
+    role: 'Member',
+    status: 'active',
+    joinedDate: '2023-04-05',
   },
   {
-    id: "5",
-    name: "Charlie Brown",
-    email: "charlie@example.com",
-    role: "Member",
-    status: "inactive",
-    joinedDate: "2023-05-12",
+    id: '5',
+    name: 'Charlie Brown',
+    email: 'charlie@example.com',
+    role: 'Member',
+    status: 'inactive',
+    joinedDate: '2023-05-12',
   },
 ];
 
 export const MembersList = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  
+  const [searchQuery, setSearchQuery] = useState('');
+
   const filteredMembers = dummyMembers.filter(
     (member) =>
       member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -97,7 +99,7 @@ export const MembersList = () => {
           Add New Member
         </Button>
       </div>
-      
+
       <Card>
         <CardHeader className="px-6 py-4">
           <div className="flex items-center justify-between">
@@ -144,11 +146,13 @@ export const MembersList = () => {
                   </TableCell>
                   <TableCell>{member.role}</TableCell>
                   <TableCell>
-                    <div className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                      member.status === "active" 
-                        ? "bg-green-100 text-green-700" 
-                        : "bg-yellow-100 text-yellow-700"
-                    }`}>
+                    <div
+                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                        member.status === 'active'
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-yellow-100 text-yellow-700'
+                      }`}
+                    >
                       {member.status}
                     </div>
                   </TableCell>
@@ -187,4 +191,4 @@ export const MembersList = () => {
       </Card>
     </div>
   );
-}; 
+};
