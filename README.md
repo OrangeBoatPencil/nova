@@ -1,6 +1,6 @@
-# Nova - Member Dashboard
+# Nova - Member Dashboard Monorepo
 
-A community member dashboard built with Next.js, Refine.dev, Supabase, and shadcn/ui.
+A community member dashboard built with Next.js, Refine.dev, Supabase, and shadcn/ui, organized as a monorepo.
 
 ## Features
 
@@ -11,16 +11,33 @@ A community member dashboard built with Next.js, Refine.dev, Supabase, and shadc
 - 🛡️ Role-based access control
 - 📱 Responsive UI with shadcn/ui
 - 🔄 CRUD operations with Refine.dev
+- 💰 Stripe integration (coming soon)
 
 ## Tech Stack
 
 - **Framework**: [Next.js](https://nextjs.org/)
+- **Monorepo Tool**: [Turborepo](https://turbo.build/)
 - **Data Provider**: [Supabase](https://supabase.io/)
 - **Admin UI Framework**: [Refine.dev](https://refine.dev/)
 - **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
 - **Authentication**: Supabase Auth
 - **Database**: PostgreSQL (via Supabase)
 - **Styling**: Tailwind CSS
+
+## Monorepo Structure
+
+```
+/
+├── apps/                  # Applications
+│   └── dashboard/         # Member dashboard (Next.js)
+├── packages/              # Shared packages
+│   ├── ui/                # UI components
+│   ├── db/                # Database client and types
+│   ├── billing/           # Stripe integration (planned)
+│   ├── gallery/           # Media utilities (planned)
+│   └── config/            # Shared configs
+└── turbo.json             # Turborepo configuration
+```
 
 ## Getting Started
 
@@ -36,7 +53,7 @@ A community member dashboard built with Next.js, Refine.dev, Supabase, and shadc
 
 ```bash
 git clone https://github.com/OrangeBoatPencil/nova.git
-cd nova/my-app
+cd nova
 ```
 
 2. Install dependencies
@@ -47,7 +64,7 @@ npm install
 
 3. Set up environment variables
 
-Create a `.env.local` file in the `my-app` directory with the following variables:
+Create a `.env.local` file in the `apps/dashboard` directory with:
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
@@ -57,15 +74,10 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 4. Run the database migrations
 
-You can use the Supabase CLI or apply the SQL migrations directly from the Supabase dashboard:
-
 ```bash
-npx supabase login
-npx supabase link --project-ref your-project-ref
-npx supabase db push
+npm run db:migrate
+npm run db:seed
 ```
-
-Alternatively, you can copy the contents of `supabase/migrations/20250502_initial_schema.sql` and run them in the Supabase SQL editor.
 
 5. Start the development server
 
@@ -73,40 +85,24 @@ Alternatively, you can copy the contents of `supabase/migrations/20250502_initia
 npm run dev
 ```
 
-6. Open [http://localhost:3000](http://localhost:3000) in your browser
+Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Project Structure
+## Development Workflow
 
-The application is located in the `my-app` directory with the following structure:
-
-```
-my-app/
-├── src/
-│   ├── app/                # Next.js app directory
-│   │   ├── dashboard/      # Dashboard routes
-│   │   ├── login/          # Authentication routes
-│   │   └── register/       # User registration
-│   ├── components/         # React components
-│   │   ├── ui/             # shadcn UI components
-│   │   └── RefineProvider.tsx  # Refine.dev provider
-│   ├── lib/                # Utility functions
-│   │   └── supabase.ts     # Supabase client
-│   └── refine/             # Refine.dev configuration
-│       ├── authProvider.ts # Auth provider
-│       └── config.ts       # Resources and data provider
-└── supabase/               # Supabase configuration
-    └── migrations/         # Database migrations
-```
+- **Run all apps and packages**: `npm run dev`
+- **Build everything**: `npm run build`
+- **Lint everything**: `npm run lint`
+- **Clean all node_modules**: `npm run clean`
 
 ## Deployment
 
-This project can be deployed to Vercel by linking your GitHub repository:
+The dashboard application is deployed to Vercel:
 
 1. Push your code to GitHub
-2. Import your project in Vercel
+2. Import project in Vercel (points to `apps/dashboard`)
 3. Set the required environment variables
 4. Deploy
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
