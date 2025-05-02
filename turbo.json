@@ -1,6 +1,6 @@
 {
-  "$schema": "https://turborepo.org/schema.json",
-  "pipeline": {
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
@@ -12,8 +12,16 @@
       "cache": false,
       "persistent": true
     },
+    "type-check": {
+      "cache": false
+    },
     "clean": {
       "cache": false
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "outputs": []
     }
-  }
+  },
+  "globalDependencies": ["tsconfig.json"]
 } 

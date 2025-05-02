@@ -1,40 +1,42 @@
-// Export supabase client and types
 import { createClient } from '@supabase/supabase-js';
-import { createServerClient, type CookieOptions } from '@supabase/ssr';
-import { cookies } from 'next/headers';
+import { z } from 'zod';
 
-// Environment variables should be validated
-if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-  throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL');
-}
-if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-  throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY');
-}
+// Database schema types
+export const MemberSchema = z.object({
+  id: z.string().uuid(),
+  email: z.string().email(),
+  name: z.string().optional(),
+  created_at: z.string().datetime(),
+  updated_at: z.string().datetime(),
+});
 
-export const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-);
+export const TeamSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string(),
+  created_at: z.string().datetime(),
+  updated_at: z.string().datetime(),
+});
 
-export const createServerSupabaseClient = (cookieStore: ReturnType<typeof cookies>) => {
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value;
-        },
-        set(name: string, value: string, options: CookieOptions) {
-          cookieStore.set({ name, value, ...options });
-        },
-        remove(name: string, options: CookieOptions) {
-          cookieStore.delete({ name, ...options });
-        },
-      },
-    }
-  );
+export const MemberRoleSchema = z.object({
+  id: z.string().uuid(),
+  member_id: z.string().uuid(),
+  team_id: z.string().uuid(),
+  role: z.enum(['admin', 'member', 'owner']),
+  created_at: z.string().datetime(),
+  updated_at: z.string().datetime(),
+});
+
+// Type exports
+export type Member = z.infer<typeof MemberSchema>;
+export type Team = z.infer<typeof TeamSchema>;
+export type MemberRole = z.infer<typeof MemberRoleSchema>;
+
+// Create a Supabase client
+export const createSupabaseClient = (
+  supabaseUrl: string,
+  supabaseKey: string
+) => {
+  return createClient(supabaseUrl, supabaseKey);
 };
 
-// Export schema types (could expand with models using zod)
-export * from './types'; 
+export type SupabaseClient = ReturnType<typeof createSupabaseClient>;
