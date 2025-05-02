@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nova - Member Dashboard
+
+A community member dashboard built with Next.js, Refine.dev, Supabase, and shadcn/ui.
+
+## Features
+
+- 🔐 Authentication with Supabase Auth
+- 👥 Team management
+- 📊 Member dashboard
+- 📚 Resource library
+- 🛡️ Role-based access control
+- 📱 Responsive UI with shadcn/ui
+- 🔄 CRUD operations with Refine.dev
+
+## Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Data Provider**: [Supabase](https://supabase.io/)
+- **Admin UI Framework**: [Refine.dev](https://refine.dev/)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **Authentication**: Supabase Auth
+- **Database**: PostgreSQL (via Supabase)
+- **Styling**: Tailwind CSS
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+- A Supabase account
+
+### Setup
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/OrangeBoatPencil/nova.git
+cd nova/my-app
+```
+
+2. Install dependencies
+
+```bash
+npm install
+```
+
+3. Set up environment variables
+
+Create a `.env.local` file in the `my-app` directory with the following variables:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+4. Run the database migrations
+
+You can use the Supabase CLI or apply the SQL migrations directly from the Supabase dashboard:
+
+```bash
+npx supabase login
+npx supabase link --project-ref your-project-ref
+npx supabase db push
+```
+
+Alternatively, you can copy the contents of `supabase/migrations/20250502_initial_schema.sql` and run them in the Supabase SQL editor.
+
+5. Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application is located in the `my-app` directory with the following structure:
 
-## Learn More
+```
+my-app/
+├── src/
+│   ├── app/                # Next.js app directory
+│   │   ├── dashboard/      # Dashboard routes
+│   │   ├── login/          # Authentication routes
+│   │   └── register/       # User registration
+│   ├── components/         # React components
+│   │   ├── ui/             # shadcn UI components
+│   │   └── RefineProvider.tsx  # Refine.dev provider
+│   ├── lib/                # Utility functions
+│   │   └── supabase.ts     # Supabase client
+│   └── refine/             # Refine.dev configuration
+│       ├── authProvider.ts # Auth provider
+│       └── config.ts       # Resources and data provider
+└── supabase/               # Supabase configuration
+    └── migrations/         # Database migrations
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project can be deployed to Vercel by linking your GitHub repository:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push your code to GitHub
+2. Import your project in Vercel
+3. Set the required environment variables
+4. Deploy
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License - see the LICENSE file for details.
