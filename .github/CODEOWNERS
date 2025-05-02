@@ -1,0 +1,12 @@
+# Default owners for everything
+* @OrangeBoatPencil/maintainers
+
+# Package-specific owners
+/packages/ui/ @OrangeBoatPencil/ui-team
+/packages/db/ @OrangeBoatPencil/db-team
+/packages/billing/ @OrangeBoatPencil/billing-team
+
+# Configuration and infrastructure
+/.github/ @OrangeBoatPencil/admin
+/turbo.json @OrangeBoatPencil/admin
+/package.json @OrangeBoatPencil/admin 

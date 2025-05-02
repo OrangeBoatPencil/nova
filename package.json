@@ -12,11 +12,24 @@
     "build": "turbo run build",
     "lint": "turbo run lint",
     "clean": "turbo run clean && rm -rf node_modules",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "db:migrate": "cd apps/dashboard && npm run db:migrate",
-    "db:seed": "cd apps/dashboard && npm run db:seed"
+    "db:seed": "cd apps/dashboard && npm run db:seed",
+    "prepare": "husky install",
+    "type-check": "turbo run type-check"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.0",
     "prettier": "^3.0.0",
     "turbo": "latest"
   },
