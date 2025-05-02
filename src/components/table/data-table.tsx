@@ -107,7 +107,7 @@ export function DataTable({ ...tableProps }: any) {
                 onValueChange={(value: any) => setPageSize(Number(value))}
               >
                 <SelectTrigger className="h-8 w-[70px]">
-                  <SelectValue placeholder={getState().pagination.pageSize} />
+                  <SelectValue>{getState().pagination.pageSize}</SelectValue>
                 </SelectTrigger>
                 <SelectContent side="top">
                   {[5, 10, 20, 30, 40, 50].map((pageSize) => (
