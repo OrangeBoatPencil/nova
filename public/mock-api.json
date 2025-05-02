@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "message": "Mock API response",
+  "users": [
+    {
+      "id": "1",
+      "email": "existing@example.com",
+      "name": "Existing User",
+      "role": "member"
+    },
+    {
+      "id": "2",
+      "email": "admin@example.com",
+      "name": "Admin User",
+      "role": "admin"
+    }
+  ]
+} 
