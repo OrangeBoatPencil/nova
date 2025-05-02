@@ -1,12 +1,29 @@
+# Nova Dashboard Codeowners File
+# See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
 # Default owners for everything
-* @OrangeBoatPencil/maintainers
+*                   @evca-team/maintainers
 
-# Package-specific owners
-/packages/ui/ @OrangeBoatPencil/ui-team
-/packages/db/ @OrangeBoatPencil/db-team
-/packages/billing/ @OrangeBoatPencil/billing-team
+# App code
+/apps/dashboard/    @evca-team/maintainers
 
-# Configuration and infrastructure
-/.github/ @OrangeBoatPencil/admin
-/turbo.json @OrangeBoatPencil/admin
-/package.json @OrangeBoatPencil/admin 
+# UI components
+/packages/ui/        @evca-team/ui-team
+
+# Database code
+/packages/db/        @evca-team/db-team
+
+# Billing integration
+/packages/billing/   @evca-team/billing-team
+
+# Configuration
+/packages/config/    @evca-team/maintainers
+
+# Repository configuration
+/.github/            @evca-team/admin
+/turbo.json          @evca-team/admin
+/package.json        @evca-team/admin
+
+# Documentation
+/CONTRIBUTING.md     @evca-team/maintainers
+/README.md           @evca-team/maintainers 

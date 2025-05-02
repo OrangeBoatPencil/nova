@@ -1,55 +1,48 @@
 ---
 name: Bug report
-about: Report a bug in Nova Dashboard
-title: 'bug: '
+about: Create a report to help us improve
+title: '[BUG] '
 labels: bug
 assignees: ''
 ---
 
-## Bug Description
+## Describe the bug
 
-<!-- A clear and concise description of the bug -->
+A clear and concise description of what the bug is.
 
-## Reproduction Steps
+## To Reproduce
 
-<!-- Steps to reproduce the behavior -->
+Steps to reproduce the behavior:
 
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
-## Expected Behavior
+## Expected behavior
 
-<!-- A clear and concise description of what you expected to happen -->
+A clear and concise description of what you expected to happen.
 
-## Actual Behavior
+## Actual behavior
 
-<!-- A clear and concise description of what actually happened -->
+What actually happened.
 
 ## Screenshots
 
-<!-- If applicable, add screenshots to help explain your problem -->
+If applicable, add screenshots to help explain your problem.
 
-## Environment
+## Environment:
 
-- **Browser**: [e.g. Chrome 120, Safari 17]
-- **OS**: [e.g. macOS 14.0, Windows 11]
-- **Device**: [e.g. Desktop, iPhone 15]
-- **Nova Version**: [e.g. commit hash or version tag]
+- OS: [e.g. macOS, Windows]
+- Browser [e.g. chrome, safari]
+- Version [e.g. 22]
+- Package/App affected: [e.g. apps/dashboard, packages/ui]
 
-## Package Information
+## Monorepo information
 
-<!-- Which package contains the bug? -->
+- Is this bug occurring in multiple packages/apps? [Yes/No]
+- If yes, which ones? [List all affected packages/apps]
 
-- [ ] apps/dashboard
-- [ ] packages/ui
-- [ ] packages/db
-- [ ] packages/billing
-- [ ] packages/gallery
-- [ ] packages/config
-- [ ] Other:
+## Additional context
 
-## Additional Context
-
-<!-- Add any other context about the problem here -->
+Add any other context about the problem here.

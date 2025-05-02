@@ -1,41 +1,33 @@
-## Description
+# Description
 
-<!-- Provide a clear and concise description of the changes made in this PR -->
+Please include a summary of the changes and which issue is fixed or what feature is added.
 
-## Related Issue
+Fixes # (issue number)
 
-<!-- Link to the related issue (if applicable) using #issue_number format -->
+## Type of change
 
-## Type of Change
+Please delete options that are not relevant.
 
-- [ ] Feature (new functionality)
-- [ ] Fix (bug resolution)
-- [ ] Refactor (code improvement without changing behavior)
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - [ ] Documentation update
-- [ ] Configuration change
-- [ ] Other (please describe):
+- [ ] Monorepo configuration update
 
 ## Monorepo Checklist
 
-- [ ] **Correct Package Placement**: New code exists in appropriate package/location
-- [ ] **No Duplication**: Ensures functionality doesn't exist elsewhere in the monorepo
-- [ ] **Package Documentation**: Added/updated README for any changed package
-- [ ] **Dependencies Declared**: All package dependencies properly listed in package.json
-- [ ] **Exports Configured**: All new components/utilities properly exported from packages
+- [ ] Changes only affect one package/app (if not, explain why multiple are affected)
+- [ ] Code follows monorepo patterns and import conventions
+- [ ] Updated shared packages are versioned appropriately
+- [ ] No unintended duplication of code between packages
 
-## Quality Checklist
+## Testing Checklist
 
-- [ ] **TypeScript**: No type errors (`turbo lint` passes)
-- [ ] **Formatting**: Code follows project style guidelines
-- [ ] **Tests**: Added/updated tests for new functionality (where applicable)
-- [ ] **Responsive Design**: UI changes are responsive across device sizes
-- [ ] **No Console Errors**: Browser console shows no errors/warnings
-- [ ] **Accessibility**: UI changes maintain/improve accessibility
+- [ ] I have tested my changes locally
+- [ ] New and existing unit tests pass locally with my changes
+- [ ] I have added tests that prove my fix is effective or that my feature works
+- [ ] Lint and type checks pass
 
-## Screenshots or GIFs
+## Additional context
 
-<!-- If applicable, add screenshots or GIFs to help explain your changes -->
-
-## Additional Notes
-
-<!-- Any other information that would be useful to reviewers -->
+Add any other context or screenshots about the pull request here.

@@ -1,182 +1,128 @@
 # Contributing to Nova Dashboard
 
-Thank you for considering contributing to Nova Dashboard! This document outlines the process for contributing to this monorepo project.
+Thank you for your interest in contributing to the Nova Dashboard monorepo! This document outlines the process for contributing to the project.
 
-## Table of Contents
-
-- [Development Philosophy](#development-philosophy)
-- [Getting Started](#getting-started)
-- [Git Workflow](#git-workflow)
-- [Monorepo Structure](#monorepo-structure)
-- [Feature Development Process](#feature-development-process)
-- [Code Style & Quality](#code-style--quality)
-- [Pull Request Process](#pull-request-process)
-- [Deployment Process](#deployment-process)
-
-## Development Philosophy
-
-Nova Dashboard follows these core principles:
-
-1. **Package-First Development**: Create reusable code in packages before integrating into apps
-2. **Single Source of Truth**: No duplicate implementations across the codebase
-3. **Clear Boundaries**: Explicit dependencies between packages
-4. **Consistent Patterns**: Follow established patterns for each package type
-5. **Self-Documenting**: Each package includes usage documentation
-
-## Getting Started
+## Development Environment
 
 ### Prerequisites
 
 - Node.js 18+
-- npm or yarn
+- npm 8+
 - Git
 
-### Setup
+### Getting Started
 
-1. Clone the repository
+1. Fork the repository
+2. Clone your fork
 
    ```bash
-   git clone https://github.com/OrangeBoatPencil/nova.git
+   git clone https://github.com/evca-team/nova.git
    cd nova
    ```
 
-2. Install dependencies
+3. Install dependencies
 
    ```bash
    npm install
    ```
 
-3. Set up environment variables
-
-   ```bash
-   # Pull from Vercel (recommended)
-   vercel env pull apps/dashboard/.env.local
-
-   # Or create manually
-   cp apps/dashboard/.env.example apps/dashboard/.env.local
-   # Then edit .env.local with your values
-   ```
-
 4. Start the development server
+
    ```bash
    npm run dev
    ```
 
-## Git Workflow
-
-### Branch Naming
-
-- `feature/short-description` - For new features
-- `fix/issue-description` - For bug fixes
-- `refactor/component-name` - For code improvements
-- `docs/update-area` - For documentation updates
-
-### Commit Messages
-
-We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
-
-- `feat: add new button component` - For features
-- `fix: resolve auth redirect issue` - For bug fixes
-- `refactor: improve type definitions` - For code improvements
-- `docs: update README` - For documentation
-- `chore: update dependencies` - For maintenance tasks
-
 ## Monorepo Structure
 
+Our project follows a monorepo structure:
+
 ```
-/
-├── apps/                  # Applications
-│   └── dashboard/         # Member dashboard (Next.js)
-├── packages/              # Shared packages
-│   ├── ui/                # UI components
-│   ├── db/                # Database client and types
-│   ├── billing/           # Stripe integration
-│   ├── gallery/           # Media utilities
-│   └── config/            # Shared configs
-└── turbo.json             # Turborepo configuration
-```
-
-### Package Responsibilities
-
-- **apps/dashboard**: Main Next.js application (imports from packages)
-- **packages/ui**: Reusable UI components built with shadcn/ui
-- **packages/db**: Database client, types, and data access utilities
-- **packages/billing**: Stripe integration for subscriptions
-- **packages/gallery**: Media handling and search utilities
-- **packages/config**: Shared configuration (ESLint, TypeScript, etc.)
-
-## Feature Development Process
-
-1. **Create an Issue**: Document the feature, including which package it belongs to
-2. **Create a Branch**: Following the branch naming convention
-3. **Package-First Development**:
-   - Identify which package the code belongs in
-   - Implement core functionality in that package
-   - Document usage in the package README
-4. **App Integration**:
-   - Import functionality from packages into apps
-   - Complete the feature implementation
-5. **Submit a PR**: Following the PR template
-
-## Code Style & Quality
-
-### Linting and Formatting
-
-- **Prettier**: For code formatting
-- **ESLint**: For code quality
-- **TypeScript**: Strict mode enabled
-
-Run checks before committing:
-
-```bash
-npm run lint      # Run linting
-npm run format    # Format code with Prettier
+nova/
+├── apps/
+│   └── dashboard/     # Next.js dashboard application
+├── packages/
+│   ├── ui/            # Shared UI components
+│   ├── db/            # Database client & schemas
+│   ├── config/        # Shared configurations
+│   ├── billing/       # Billing integration (optional)
+│   └── gallery/       # Media gallery features (optional)
+└── ...
 ```
 
-### Component Guidelines
+## Development Workflow
 
-1. **UI Components**:
+1. **Create a branch**
 
-   - Each component should be well-typed
-   - Include clear props documentation
-   - Export from package index.ts
-   - Document in README.md with examples
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
 
-2. **Database Utilities**:
-   - Strong TypeScript interfaces
-   - Error handling for database operations
-   - Clear documentation for complex queries
+2. **Make your changes**
 
-## Pull Request Process
+   - Follow the code style guidelines
+   - Keep each package focused on a single responsibility
+   - Reuse shared packages whenever possible
 
-1. **Create a PR**: Use the PR template
-2. **Describe Changes**: Clearly document what changes were made
-3. **Self-Review**: Go through the PR checklist yourself first
-4. **Request Review**: Assign to appropriate reviewers
-5. **Address Feedback**: Make requested changes promptly
-6. **Merge**: Once approved, merge your PR
+3. **Test your changes**
 
-## Deployment Process
+   ```bash
+   npm run lint
+   npm run type-check
+   npm run build
+   ```
 
-1. **Continuous Integration**: GitHub Actions run on every PR
-2. **Preview Deployments**: Automatically deployed from PRs
-3. **Staging Deployment**: Merged code is deployed to staging
-4. **Production Deployment**: Manual promotion from staging after testing
+4. **Commit your changes**
 
-### Environment Variables
+   ```bash
+   git commit -m "feat: add new feature"
+   ```
 
-- Development: Local .env.local files
-- Preview/Staging/Production: Environment variables in Vercel
+   Use conventional commit messages:
 
-### Debugging Deployments
+   - `feat:` for new features
+   - `fix:` for bug fixes
+   - `docs:` for documentation changes
+   - `chore:` for maintenance tasks
+   - `refactor:` for code refactoring
+   - `test:` for adding tests
 
-If a deployment fails:
+5. **Push your changes**
 
-1. Check Vercel logs
-2. Verify environment variables
-3. Test locally with production settings
-4. Reach out to the team for help
+   ```bash
+   git push origin feature/your-feature-name
+   ```
 
----
+6. **Create a pull request**
+   - Use the provided PR template
+   - Link to any related issues
+   - Be descriptive about what has changed
 
-Thank you for contributing to Nova Dashboard! If you have any questions, please reach out to the team.
+## Code Standards
+
+- **TypeScript**: Use strict type checking
+- **Linting**: Follow ESLint rules
+- **Formatting**: Use Prettier
+- **Tests**: Add tests for new functionality
+- **Documentation**: Update docs for new features or changes
+
+## Package Development Guidelines
+
+1. **Package-First Approach**
+
+   - Add new functionality to appropriate packages
+   - Prefer creating reusable packages over app-specific code
+
+2. **Versioning**
+
+   - Follow semantic versioning for packages
+   - Document breaking changes
+
+3. **Dependencies**
+   - Keep dependencies minimal and up-to-date
+   - Use `peerDependencies` appropriately
+
+## Need Help?
+
+- Check the existing issues
+- Create a new issue with the appropriate template
+- Discuss major changes before implementation

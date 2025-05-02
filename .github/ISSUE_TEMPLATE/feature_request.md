@@ -1,26 +1,24 @@
 ---
 name: Feature request
-about: Suggest a new feature for Nova Dashboard
-title: 'feat: '
+about: Suggest an idea for Nova Dashboard
+title: '[FEATURE] '
 labels: enhancement
 assignees: ''
 ---
 
-## Feature Description
+## Is your feature request related to a problem? Please describe.
 
-<!-- A clear and concise description of the feature you're proposing -->
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
-## Problem Solved
+## Describe the solution you'd like
 
-<!-- Describe the problem or need this feature addresses -->
+A clear and concise description of what you want to happen.
 
-## Proposed Implementation
+## Describe alternatives you've considered
 
-<!-- Describe how this feature might be implemented -->
+A clear and concise description of any alternative solutions or features you've considered.
 
-### Package Placement
-
-<!-- Which package should this feature belong to? -->
+## Which package/app would this feature belong in?
 
 - [ ] apps/dashboard
 - [ ] packages/ui
@@ -28,15 +26,12 @@ assignees: ''
 - [ ] packages/billing
 - [ ] packages/gallery
 - [ ] packages/config
-- [ ] New package (please describe):
+- [ ] Other (please specify):
 
-## Acceptance Criteria
+## Implementation plan
 
-<!-- List the requirements that must be met for this feature to be considered complete -->
+If you have ideas on how to implement this feature, please share them here.
 
-- [ ] Requirement 1
-- [ ] Requirement 2
+## Additional context
 
-## Additional Context
-
-<!-- Add any other context, screenshots, or examples about the feature request here -->
+Add any other context or screenshots about the feature request here.

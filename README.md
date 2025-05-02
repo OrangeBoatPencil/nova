@@ -1,42 +1,38 @@
-# Nova - Member Dashboard Monorepo
+# Nova Dashboard
 
-A community member dashboard built with Next.js, Refine.dev, Supabase, and shadcn/ui, organized as a monorepo.
+A modern dashboard for member management and team collaboration, built with Next.js, Supabase, Refine, and shadcn/ui.
 
 ## Features
 
-- 🔐 Authentication with Supabase Auth
-- 👥 Team management
-- 📊 Member dashboard
-- 📚 Resource library
-- 🛡️ Role-based access control
-- 📱 Responsive UI with shadcn/ui
-- 🔄 CRUD operations with Refine.dev
-- 💰 Stripe integration (coming soon)
+- **Authentication**: Email link and OAuth sign-in with Supabase
+- **Member Management**: Admin tools for user management
+- **Resource Library**: Shared files and resources
+- **Team Collaboration**: Team-based access controls
+- **Billing Integration**: Subscription management with Stripe
 
 ## Tech Stack
 
-- **Framework**: [Next.js](https://nextjs.org/)
-- **Monorepo Tool**: [Turborepo](https://turbo.build/)
-- **Data Provider**: [Supabase](https://supabase.io/)
-- **Admin UI Framework**: [Refine.dev](https://refine.dev/)
-- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **Frontend**: Next.js 14 (App Router)
+- **UI**: shadcn/ui (Radix + Tailwind CSS)
+- **Admin Framework**: Refine v4
+- **Database**: Supabase Postgres
 - **Authentication**: Supabase Auth
-- **Database**: PostgreSQL (via Supabase)
-- **Styling**: Tailwind CSS
+- **Build System**: Turborepo
+- **Deployment**: Vercel
 
 ## Monorepo Structure
 
 ```
-/
-├── apps/                  # Applications
-│   └── dashboard/         # Member dashboard (Next.js)
-├── packages/              # Shared packages
-│   ├── ui/                # UI components
-│   ├── db/                # Database client and types
-│   ├── billing/           # Stripe integration (planned)
-│   ├── gallery/           # Media utilities (planned)
-│   └── config/            # Shared configs
-└── turbo.json             # Turborepo configuration
+nova/
+├── apps/
+│   └── dashboard/     # Next.js dashboard application
+├── packages/
+│   ├── ui/            # Shared UI components
+│   ├── db/            # Database client & schemas
+│   ├── config/        # Shared configurations
+│   ├── billing/       # Billing integration
+│   └── gallery/       # Media gallery features
+└── ...
 ```
 
 ## Getting Started
@@ -44,15 +40,16 @@ A community member dashboard built with Next.js, Refine.dev, Supabase, and shadc
 ### Prerequisites
 
 - Node.js 18+
-- npm or yarn
-- A Supabase account
+- npm 8+
+- Supabase account
+- Vercel account (optional for deployment)
 
-### Setup
+### Installation
 
 1. Clone the repository
 
 ```bash
-git clone https://github.com/OrangeBoatPencil/nova.git
+git clone https://github.com/evca-team/nova.git
 cd nova
 ```
 
@@ -64,45 +61,33 @@ npm install
 
 3. Set up environment variables
 
-Create a `.env.local` file in the `apps/dashboard` directory with:
-
-```
-NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-```
-
-4. Run the database migrations
-
 ```bash
-npm run db:migrate
-npm run db:seed
+cp apps/dashboard/.env.example apps/dashboard/.env.local
+# Edit .env.local with your Supabase credentials
 ```
 
-5. Start the development server
+4. Start the development server
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Development Workflow
+## Development
 
-- **Run all apps and packages**: `npm run dev`
-- **Build everything**: `npm run build`
-- **Lint everything**: `npm run lint`
-- **Clean all node_modules**: `npm run clean`
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed development guidelines.
 
 ## Deployment
 
-The dashboard application is deployed to Vercel:
+This project is configured for deployment on Vercel. See our [Vercel setup guide](.github/VERCEL_SETUP.md) for instructions.
 
-1. Push your code to GitHub
-2. Import project in Vercel (points to `apps/dashboard`)
-3. Set the required environment variables
-4. Deploy
+## Documentation
+
+- [Supabase Setup](.github/SUPABASE_SETUP.md)
+- [Branch Protection](.github/BRANCH_PROTECTION.md)
+- [Vercel Setup](.github/VERCEL_SETUP.md)
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the LICENSE file for details.

@@ -26,7 +26,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-project-id: prj_owF852uzviJkJPHy0S7zzd7t25OL
           working-directory: ./apps/dashboard
           alias-domains: |
             pr-{{PR_NUMBER}}-nova.vercel.app 
