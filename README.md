@@ -20,6 +20,32 @@ A modern dashboard for member management and team collaboration, built with Next
 - **Build System**: Turborepo
 - **Deployment**: Vercel
 
+## Authentication architecture
+
+The application relies **solely on Supabase Auth** (v2) and Refine's `authProvider` wrapper.
+
+Key points:
+
+| Layer               | File(s) / Location                                                | Purpose                                                                                 |
+| ------------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------- | ----------------- | ------------------------------------------------------ |
+| Supabase clients    | `src/utils/supabase/client.ts`, `src/utils/supabase/server.ts`    | Browser and server clients configured with anon key & cookie management                 |
+| Session refresh     | `src/utils/supabase/middleware.ts` wire-up in `src/middleware.ts` | Refreshes sessions on every request so SSR components always have user context          |
+| Refine authProvider | `src/providers/auth-provider.ts`                                  | Implements login, register, logout, forgot-password, update-password, permissions, etc. |
+| Public routes       | `src/app/(login                                                   | register                                                                                | forgot-password | reset-password)/` | Forms that call the authProvider **or** REST endpoints |
+| Callback handler    | `src/app/auth/callback/route.ts`                                  | Converts OAuth or magic-link callbacks into a Supabase session                          |
+| REST endpoints      | `src/app/api/auth/forgot-password` & `reset-password`             | Allow password flows without relying on Refine hooks                                    |
+| Tests               | `tests/e2e/auth-flow.spec.ts`                                     | Playwright scenarios covering email, OAuth, password reset                              |
+
+Supported flows:
+
+1. **Email/password login** – `signInWithPassword`.
+2. **OAuth (GitHub, Google)** – `signInWithOAuth` → `/auth/callback` → session.
+3. **Registration** – `signUp` + email verification (redirect to `/auth/callback`).
+4. **Forgot / reset password** – reset email to `/reset-password`; user sets new password which triggers `updateUser`.
+5. **Sign-out** – `auth.signOut()`; middleware drops cookies.
+
+No other auth frameworks (e.g., NextAuth, Clerk) are present.
+
 ## Monorepo Structure
 
 ```
