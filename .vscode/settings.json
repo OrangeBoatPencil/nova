@@ -1,0 +1,45 @@
+{
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.experimental.useFlatConfig": true,
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+
+  // Tailwind CSS IntelliSense Config
+  "files.associations": {
+    // Ensure Tailwind directives are recognized in CSS files
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.includeLanguages": {
+    // Example: Enable Tailwind suggestions in Markdown files if needed
+    // "markdown": "html"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    // Add custom regex patterns if you use Tailwind classes in unusual ways
+    // ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+
+  // Python / Pylance Config
+  // Important: Use Command Palette (Cmd+Shift+P) -> "Python: Select Interpreter"
+  //            to choose the correct interpreter for this project (ideally a venv).
+  // Setting python.defaultInterpreterPath here is an alternative but less flexible.
+  // "python.defaultInterpreterPath": "/path/to/your/project/venv/bin/python",
+  "python.analysis.typeCheckingMode": "basic", // Or "strict" for more rigorous type checks
+  "python.formatting.provider": "none", // Set to "black" or "autopep8" if you use them (install required)
+  "python.linting.enabled": true, // Enable/disable linting globally for Python
+  "python.linting.pylintEnabled": true, // Example: enable pylint (install required)
+  // Add configurations for other linters like flake8, mypy if used
+
+  // YAML Config (Red Hat YAML Extension)
+  "yaml.schemas": {
+    // Example: Associate a schema with GitHub Workflow files automatically
+    "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.{yml,yaml}"
+    // Example: Associate Kubernetes schemas if needed
+    // "kubernetes": "kube/**/*.yaml",
+    // Add other project-specific YAML schema associations here
+  }
+
+  // Note: Debugger configurations (Firefox, Python, etc.) belong in .vscode/launch.json
+  // Note: Settings for GitLens, Docker, Go, React Native are often user-level or fine with defaults.
+}

@@ -1,0 +1,46 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches:
+      - main # Trigger deployment on push to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Specify your Node.js version (adjust if needed)
+          cache: 'npm' # Cache npm dependencies based on package-lock.json
+
+      - name: Install Dependencies
+        run: npm ci # Use ci for clean installs in CI environments using package-lock.json
+
+      # This assumes your Turborepo setup builds the correct application
+      # with the root build command. If you need to build a specific app,
+      # adjust the command, e.g., npm run build --filter=my-app
+      - name: Build
+        run: npm run build
+        env:
+          # Ensure environment variables needed for the build are set if required
+          # NEXT_PUBLIC_... : ${{ secrets.NEXT_PUBLIC_... }}
+          # VERCEL_ENV: 'production' # May be needed depending on Vercel config
+
+      - name: Deploy to Vercel
+        # Using amondnet/vercel-action as an alternative to vercel/vercel-action
+        # Choose the one that suits your needs best.
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # Required
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # Required
+          # Optional: If your Vercel project isn't linked to the Git repo root,
+          # specify the directory relative to the root.
+          # Example: vercel-project-path: 'apps/dashboard'
+          # Deploy to Vercel Production environment
+          vercel-args: '--prod' 

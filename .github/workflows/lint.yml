@@ -1,0 +1,34 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Add concurrency control
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  checks: write
+  contents: write
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+      - run: npm ci
+      - uses: wearerequired/lint-action@v2
+        with:
+          auto_fix: true
+          eslint: true
+          eslint_args: "--max-warnings 0"
+          prettier: true

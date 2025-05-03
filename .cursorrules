@@ -1,0 +1,56 @@
+{
+  "rules": [
+    {
+      "id": "ts-required",
+      "description": "All code must be written in TypeScript.",
+      "severity": "error"
+    },
+    {
+      "id": "prefer-interfaces",
+      "description": "Prefer TypeScript interfaces over type aliases for defining object shapes or implementing classes.",
+      "severity": "warning"
+    },
+    {
+      "id": "functional-components-only",
+      "description": "Use functional components with TypeScript interfaces/types for props. Avoid class components.",
+      "severity": "error"
+    },
+    {
+      "id": "descriptive-boolean-vars",
+      "description": "Boolean variable names should use auxiliary verbs (e.g., `isLoading`, `hasError`, `shouldUpdate`).",
+      "severity": "warning"
+    },
+    {
+      "id": "minimize-use-client",
+      "description": "Minimize the use of the 'use client' directive. Favor React Server Components (RSC) whenever possible. Clearly justify any use of 'use client'.",
+      "severity": "error"
+    },
+    {
+      "id": "minimize-useeffect-usestate",
+      "description": "Minimize the use of `useEffect` and `useState`. Explore server-driven solutions or alternative React hooks first.",
+      "severity": "warning"
+    },
+    {
+      "id": "use-suspense-for-client",
+      "description": "Client components ('use client') should generally be wrapped in `<Suspense>` with an appropriate fallback UI.",
+      "severity": "warning"
+    },
+    {
+      "id": "use-dynamic-loading",
+      "description": "Use `next/dynamic` for non-critical components or components that rely heavily on client-side JavaScript to improve initial load performance.",
+      "severity": "warning"
+    },
+    {
+       "id": "follow-nextjs-patterns",
+       "description": "Adhere to official Next.js documentation recommendations for Data Fetching, Rendering (Client/Server Components), and Routing within the App Router.",
+       "severity": "error"
+    }
+  ],
+  "guidelines": [
+    "Write concise, technical, and correct TypeScript code.",
+    "Employ functional and declarative programming patterns.",
+    "Structure component files logically: Start with the main exported component, followed by related subcomponents, helper functions, static content/constants, and finally type/interface definitions.",
+    "Ensure code examples are accurate and relevant to the context.",
+    "Prioritize performance optimization techniques outlined in the rules."
+  ]
+} 

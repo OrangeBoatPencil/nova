@@ -1,0 +1,49 @@
+# .github/workflows/eslint-scan.yml
+name: ESLint Code Scanning
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Add concurrency control (good practice here too)
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  eslint:
+    name: ESLint Scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read          # To checkout the code
+      security-events: write # To upload SARIF results to code scanning
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18 # Match the version used in lint.yml
+          cache: 'npm'     # Cache dependencies
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint for Code Scanning
+        # Corrected: Removed --config flag, relies on auto-detection of eslint.config.mjs
+        # Ensure '@microsoft/eslint-formatter-sarif' is installed (npm install --save-dev @microsoft/eslint-formatter-sarif)
+        run: >
+          npx eslint .
+          --ext .js,.jsx,.ts,.tsx
+          --format @microsoft/eslint-formatter-sarif
+          --output-file eslint-results.sarif
+        continue-on-error: true # Important: Upload results even if errors are found
+
+      - name: Upload SARIF file to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v3 # Use v3 for latest features/fixes
+        with:
+          sarif_file: eslint-results.sarif
+          category: eslint # Optional: Category for the analysis in GitHub UI 
